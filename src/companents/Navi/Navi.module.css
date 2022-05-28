@@ -1,0 +1,12 @@
+.nav{
+    grid-area: navi;
+    background-color: greenyellow;
+}
+
+.item{
+    color: white;
+}
+.item.action{
+    color: blueviolet;
+}
+

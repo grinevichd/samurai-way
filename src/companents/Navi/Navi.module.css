@@ -1,12 +1,15 @@
 .nav{
     grid-area: navi;
     background-color: greenyellow;
+    padding: 20px;
 }
 
-.item{
+.item a{
     color: white;
+    text-decoration: none;
+
 }
-.item.action{
+.item a.action{
     color: blueviolet;
 }
 

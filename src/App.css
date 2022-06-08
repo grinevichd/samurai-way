@@ -10,4 +10,15 @@
 
 
 
+.app-wrapper-content{
+  grid-area: content;
+  background-color: aqua;
+
+}
+
+.app-wrapper-content img {
+  width: 100%;
+  height: 27%;
+  object-fit: cover;
+}
 

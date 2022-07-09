@@ -1,43 +1,46 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, {ChangeEvent} from 'react'
 import s from "./Dialogs.module.css"
+import {MessagesPageType,} from "../../redux/store";
+import {Message} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem";
 
-type DialogType ={
-    name : string
-    id : string
-}
-type MessageType = {
-    message:string
-}
 
-const Dialog = (props : DialogType) =>{
-    let way = `/dialogs/${props.id}`
-    return(
-        <div className={`${s.dialog}`}><NavLink to={way}>{props.name}</NavLink></div>
-        );
-}
-const Message = (props : MessageType)=>{
-    return(
-        <div className={s.message}>{props.message}</div>
-    );
+type DialogsPropsType = {
+    messagesPage: MessagesPageType
+
+    updateNewMessageBody : (value : string) => void
+    sendMessage : () =>void
 }
 
-export const Dialogs = () =>{
-    return(
+
+export const Dialogs = (props: DialogsPropsType) => {
+    const newDialogs = props.messagesPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    const newMessages = props.messagesPage.messages.map(message => <Message message={message.message}/>)
+
+    const sendMessage = () =>{
+            props.sendMessage()
+
+
+    }
+    const changeNewMessage = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+        props.updateNewMessageBody(e.currentTarget.value)
+
+
+    }
+
+    return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <Dialog name={"Kate"} id={"1"}/>
-                <Dialog name={"Sasha"} id={"2"}/>
-                <Dialog name={"Dima"} id={"3"}/>
-                <Dialog name={"Victor"} id={"4"}/>
-                <Dialog name={"Max"} id={"5"}/>
-                <Dialog name={"Nick"} id={"6"}/>
+                {newDialogs}
             </div>
             <div className={s.messages}>
-                <Message message={"Hi dude"}/>
-                <Message message={"Yo man"}/>
-                <Message message={"How are u"}/>
+                {newMessages}
+                <div>
+                    <textarea  onChange={changeNewMessage} value={props.messagesPage.messageText}/>
+                    <button onClick={sendMessage}>send message</button>
+                </div>
             </div>
+
         </div>
     )
 }

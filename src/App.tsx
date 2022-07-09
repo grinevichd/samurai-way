@@ -1,35 +1,67 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./companents/Header/Header";
-import {Navi} from "./companents/Navi/Navi";
 import {Profile} from "./companents/Profile/Profile";
-import {Dialogs} from "./companents/Dialogs/Dialogs";
-import { News } from './companents/News/News';
+import {News} from './companents/News/News';
 import {Music} from "./companents/Music/Music";
 import {Settings} from "./companents/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
+import {DialogContainer} from "./companents/Dialogs/DialogsContainer";
+import {NaviContainer} from "./companents/Navi/NaviContainer";
 
-const App = () => {
+
+type AppPropsType = {
+    // state: RootPropsType
+    // dispatch: (action: ActionsTypes) => void
+    // store : StoreReduxType
+}
+
+
+
+const App = (props: AppPropsType) => {
+
+
     return (
         <BrowserRouter>
-        <div className="app-wrapper">
-        <Header />
-        <Navi/>
+            <div className="app-wrapper">
+                <Header/>
+                {/*<Navi myFriends={props.store.sidebar}/>*/}
+                <NaviContainer/>
+                <div className="app-wrapper-content">
+                    {/*<Route path={"/dialogs"}*/}
+                    {/*       render={() => <Dialogs messagesPage={props.state.messagesPage} dispatch={props.dispatch}*/}
 
-            <div className="app-wrapper-content">
-                <Route path={"/dialogs"} component={Dialogs}/>
-                <Route path={"/profile"} component={Profile}/>
-                <Route path={"/news"} component={News}/>
-                <Route path={"/music"} component={Music}/>
-                <Route path={"/settings"} component={Settings}/>
+                    {/*       />*/}
+
+                    {/*       }/>*/}
+                    <Route path={"/dialogs"}
+                           render={() => <DialogContainer
+                           />
+
+                           }/>
+                    {/*<Route path={"/profile"}*/}
+                    {/*       render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}*/}
+                    {/*       />}*/}
+
+                    {/*/>*/}
+                    <Route path={"/profile"}
+                           render={() => <Profile
+                               // store={props.store}
+                               //                    dispatch={props.dispatch}
+                           />}
+
+                    />
+                    
+                    <Route path={"/news"} component={News}/>
+                    <Route path={"/music"} component={Music}/>
+                    <Route path={"/settings"} component={Settings}/>
+                </div>
+
+
             </div>
-
-
-        </div>
         </BrowserRouter>
     );
 }
 
-//test commit
 
 export default App;

@@ -1,14 +1,32 @@
 import React from "react";
-
-import style from "./Profile.module.css"
-import {MyPosts} from "./MyPosts/MyPosts";
 import {InfoProfile} from "./InfoProfile/InfoProfile";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-export const Profile = () =>{
-    return(
+
+type ProfilePropsType = {
+    // profilePage: ProfilePageType
+    // dispatch: (action: ActionsTypes) => void
+    // store : StoreReduxType
+}
+
+
+export const Profile = (props: ProfilePropsType) => {
+
+    return (
         <>
+
             <InfoProfile/>
-            <MyPosts />
+            {/*<MyPostsContainer*/}
+            {/*    profile={props.profilePage}*/}
+            {/*    myPostText={props.profilePage.myPostText}*/}
+            {/*    dispatch={props.dispatch}*/}
+            {/*/>*/}
+            <MyPostsContainer
+                // store={props.store} dispatch={props.dispatch}
+            />
+
+
+
         </>
     );
 }

@@ -7,7 +7,9 @@ import {Music} from "./companents/Music/Music";
 import {Settings} from "./companents/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 import {DialogContainer} from "./companents/Dialogs/DialogsContainer";
-import {NaviContainer} from "./companents/Navi/NaviContainer";
+import {NaviContainer} from "./companents/Navi/NaviContainer"
+import {UsersContainer} from "./companents/Users/UserContainer";
+import ProfileContainer from "./companents/Profile/ProfileContainer";
 
 
 type AppPropsType = {
@@ -17,44 +19,30 @@ type AppPropsType = {
 }
 
 
-
-const App = (props: AppPropsType) => {
+const App = () => {
 
 
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                {/*<Navi myFriends={props.store.sidebar}/>*/}
                 <NaviContainer/>
                 <div className="app-wrapper-content">
-                    {/*<Route path={"/dialogs"}*/}
-                    {/*       render={() => <Dialogs messagesPage={props.state.messagesPage} dispatch={props.dispatch}*/}
-
-                    {/*       />*/}
-
-                    {/*       }/>*/}
                     <Route path={"/dialogs"}
                            render={() => <DialogContainer
-                           />
+                           />}/>
 
-                           }/>
-                    {/*<Route path={"/profile"}*/}
-                    {/*       render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}*/}
-                    {/*       />}*/}
+                    <Route path={"/profile/:id?"}
+                           render={() => <ProfileContainer
 
-                    {/*/>*/}
-                    <Route path={"/profile"}
-                           render={() => <Profile
-                               // store={props.store}
-                               //                    dispatch={props.dispatch}
                            />}
 
                     />
-                    
+
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
+                    <Route path={"/users"} component={UsersContainer}/>
                 </div>
 
 

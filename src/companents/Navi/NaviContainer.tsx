@@ -1,18 +1,32 @@
 import React from "react";
-import StoreContext from "../../StoreContext";
+
 import {Navi} from "./Navi";
+import {connect} from "react-redux";
+import {StoreReduxType} from "../../redux/store-redux";
+import {addFriend, changeFriend, SidebarType} from "../../redux/sidebar-reducer";
+import {Dispatch} from "redux";
 
 
-export const NaviContainer = () => {
-
-    return <StoreContext.Consumer>
-        {(store) => {
-            let state = store.getState()
-            return (
-                <Navi myFriends={state.sidebar}/>
-
-            );
-        }
-        }
-    </StoreContext.Consumer>
+type mapStateToPropsType = {
+    myFriends : SidebarType
 }
+type mapDispatchToPropsType = {
+    addFriend : () => void
+    changeFriend : (text : string) => void
+}
+export type FriendsType = mapStateToPropsType & mapDispatchToPropsType
+
+const mapDispatchToProps = (dispatch : Dispatch) : mapDispatchToPropsType => {
+    return {
+        addFriend : () => dispatch(addFriend()),
+        changeFriend : (text : string) => dispatch(changeFriend(text))
+
+}
+    }
+const mapStateToProps = (state : StoreReduxType):mapStateToPropsType => {
+  return {
+      myFriends : state.sidebar
+  }
+}
+
+export const NaviContainer = connect(mapStateToProps,mapDispatchToProps)(Navi)

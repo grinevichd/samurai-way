@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {store} from "./redux/store-redux"
-import {Provider} from "./StoreContext";
-
-
-const renderTree = () => {
+import { Provider } from 'react-redux';
 
     ReactDOM.render(
         <Provider store={store}>
@@ -15,11 +12,3 @@ const renderTree = () => {
 
         document.getElementById('root')
     );
-}
-renderTree()
-
-
-store.subscribe(()=>{
-
-    renderTree()
-})

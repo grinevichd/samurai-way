@@ -1,47 +1,12 @@
-import {dialogsReducer} from "./dialogs-reducer";
-import {profileReducer} from "./profile-reducer";
+import {dialogsReducer, MessagesPageType} from "./dialogs-reducer";
+import {ProfilePageType, profileReducer, UserProfile} from "./profile-reducer";
+import {SidebarType} from "./sidebar-reducer";
 
-type FriendsType = {
-    name: string
-}
-
-
-type PostsType = {
-    id: number
-    message: string
-    countLikes: number
-}
-export type DialogsType = {
-    id: number
-    name: string
-}
-export type MessagesType = {
-    id: number
-    message: string
-}
-
-export type ProfilePageType = {
-    postsData: Array<PostsType>
-    myPostText: string
-
-}
-
-export type MessagesPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
-    messageText: string
-
-}
-export type SidebarType = {
-    friends: Array<FriendsType>
-}
 
 export type RootPropsType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
     sidebar: SidebarType
-
-
 }
 
 
@@ -58,6 +23,10 @@ export type ActionsTypes =
     | ChangePostActionType
     | AddMessageActionType
     | ChangeMessageActionType
+    | AddFriendAT
+    | ChangeFriendAT
+| UserProfileAT
+
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -70,8 +39,19 @@ export type ChangePostActionType = {
     postText: string
 }
 export type ChangeMessageActionType = {
-    type : "CHANGE-MESSAGE-POST",
-    message : string
+    type: "CHANGE-MESSAGE-POST",
+    message: string
+}
+export type AddFriendAT = {
+    type: "ADD-FRIEND"
+}
+export type ChangeFriendAT = {
+    type: "CHANGE-FRIEND-NAV"
+    message: string
+}
+export type UserProfileAT = {
+    type : "SET_USER_TYPE"
+    profile : UserProfile
 }
 
 
@@ -83,7 +63,8 @@ export let store: storeType = {
                 {id: 1, message: "Hello how are u?", countLikes: 15},
                 {id: 2, message: "yup it's my first post", countLikes: 25},
             ],
-            myPostText: "dima"
+            myPostText: "dima",
+            profileUser : null
         },
         messagesPage: {
             dialogs: [
@@ -108,7 +89,8 @@ export let store: storeType = {
                 {name: "Dima"},
                 {name: "Victoria"}
 
-            ]
+            ],
+            newFriend : ""
         }
     },
     _callSubscriber(state: any) {

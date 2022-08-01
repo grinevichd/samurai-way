@@ -1,28 +1,79 @@
-import {ActionsTypes, AddPostActionType, ChangePostActionType, ProfilePageType} from "./store";
+import {ActionsTypes, AddPostActionType, ChangePostActionType, UserProfileAT} from "./store";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_NEW_POST = "CHANGE-NEW-POST";
+const SET_USER_TYPE = "SET_USER_TYPE"; 
+export  type PostsType = {
+    id: number
+    message: string
+    countLikes: number
+}
 
-let initialState =  {
+export type UserProfile = {
+    "aboutMe": null | string
+    "contacts": {
+        "facebook": null | string
+        "website": null | string
+        "vk": null | string
+        "twitter": null | string
+        "instagram": null | string
+        "youtube": null | string
+        "github": null | string
+        "mainLink": null | string
+    },
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": null | string
+    "fullName": string
+    "userId": number
+    "photos": {
+        "small": undefined | string
+        "large": undefined | string
+    }
+}
+
+export type ProfilePageType = {
+    postsData: Array<PostsType>
+    myPostText: string
+    profileUser : UserProfile | null
+
+
+}
+
+
+let initialState: ProfilePageType = {
 
     postsData: [
         {id: 1, message: "Hello how are u?", countLikes: 15},
         {id: 2, message: "yup it's my first post", countLikes: 25},
     ],
-        myPostText: "dima"
+    myPostText: "dima",
+    profileUser : null
+
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
 
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             const newPost = {id: 5, message: state.myPostText, countLikes: 0}
-            state.postsData.push(newPost)
-            state.myPostText = ""
-            return state
-        case CHANGE_NEW_POST:
-            state.myPostText = action.postText
-            return state
+            return {
+                ...state,
+                postsData : [...state.postsData, newPost],
+                myPostText : ""
+            }
+        }
+        case CHANGE_NEW_POST: {
+            return {
+                ...state,
+                myPostText : action.postText
+            }
+        }
+        case SET_USER_TYPE:{
+            return {
+                ...state,
+                profileUser : action.profile
+            }
+        }
         default :
             return state
     }
@@ -34,4 +85,11 @@ export const addPostActionCreator = (): AddPostActionType => {
 export const onAreaChangeActionCreator = (text: string): ChangePostActionType => {
 
     return {type: CHANGE_NEW_POST, postText: text}
+}
+export const setUserProfile = (profile:UserProfile):UserProfileAT => {
+    debugger
+  return{
+      type : SET_USER_TYPE,
+      profile
+  }
 }

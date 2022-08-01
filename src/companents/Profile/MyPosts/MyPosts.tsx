@@ -1,16 +1,9 @@
 import React from "react";
-
 import style from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {ProfilePageType} from "../../../redux/store"
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
-type MyPostsPropsType = {
-    profile : ProfilePageType
-    myPostText : string
-    addPost : ()=>void
-    updateNewPostText : (value : string) =>void
-}
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -25,7 +18,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
       const text = elementRef.current
         if(text){
-            props.updateNewPostText(text.value)
+            props.onAreaChange(text.value)
         }
     }
 

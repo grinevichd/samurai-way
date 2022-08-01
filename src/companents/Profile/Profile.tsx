@@ -1,32 +1,16 @@
 import React from "react";
 import {InfoProfile} from "./InfoProfile/InfoProfile";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-
-
+import {UserProfile} from "../../redux/profile-reducer";
 type ProfilePropsType = {
-    // profilePage: ProfilePageType
-    // dispatch: (action: ActionsTypes) => void
-    // store : StoreReduxType
+    profileUser : UserProfile | null
 }
-
-
 export const Profile = (props: ProfilePropsType) => {
-
     return (
         <>
-
-            <InfoProfile/>
-            {/*<MyPostsContainer*/}
-            {/*    profile={props.profilePage}*/}
-            {/*    myPostText={props.profilePage.myPostText}*/}
-            {/*    dispatch={props.dispatch}*/}
-            {/*/>*/}
+            <InfoProfile profileUser={props.profileUser}/>
             <MyPostsContainer
-                // store={props.store} dispatch={props.dispatch}
             />
-
-
-
         </>
     );
 }

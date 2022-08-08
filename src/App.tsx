@@ -10,6 +10,7 @@ import {DialogContainer} from "./companents/Dialogs/DialogsContainer";
 import {NaviContainer} from "./companents/Navi/NaviContainer"
 import {UsersContainer} from "./companents/Users/UserContainer";
 import ProfileContainer from "./companents/Profile/ProfileContainer";
+import HeaderContainer from "./companents/Header/HeaderContainer";
 
 
 type AppPropsType = {
@@ -25,7 +26,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <NaviContainer/>
                 <div className="app-wrapper-content">
                     <Route path={"/dialogs"}

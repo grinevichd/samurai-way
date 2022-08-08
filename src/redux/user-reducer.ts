@@ -20,7 +20,6 @@ type UnfollowAT = {
 type SetUsersAT = {
     type: "SET_USERS"
     users: UsersType[]
-
 }
 
 export type UsersType = {
@@ -43,6 +42,7 @@ type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress : Array<number>
 
 }
 
@@ -52,7 +52,8 @@ let initialState: InitialStateType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress : []
 }
 
 export const userReducer = (state: InitialStateType = initialState, action: UsersAC): InitialStateType => {
@@ -78,6 +79,12 @@ export const userReducer = (state: InitialStateType = initialState, action: User
             return {...state, totalUsersCount: action.count}
         case "CHANGE-LOADER" :
             return {...state, isFetching : action.value}
+        case "FOLLOWING_IN_PROGRESS":
+            return {...state,
+                followingInProgress : action.value
+                ? [...state.followingInProgress, action.userID]
+                :state.followingInProgress.filter((id) => id!== action.userID)
+    }
         default :
             return state
     }
@@ -87,10 +94,19 @@ export const userReducer = (state: InitialStateType = initialState, action: User
 
 export const follow = (userID: number): FollowAT => ({type: FOLLOW, userID})
 export const unfollow = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
-export const setState = (users: UsersType[]): SetUsersAT => ({type: SET_USERS, users})
+export const setState = (users: UsersType[]): SetUsersAT => {
+
+  return   {type: SET_USERS, users}
+}
 export const setCurrentPage = (page: number) => ({type: "SET_CURRENT_PAGE", page} as const)
 export const setTotalUserCount = (count: number) => ({type: "SET_TOTAL_COUNT", count} as const)
 export const setLoaderParams = (value: boolean) => ({type: "CHANGE-LOADER", value} as const)
+
+export const setFollowing = (value:boolean,userID:number)=>({
+    type : "FOLLOWING_IN_PROGRESS",
+    value,
+    userID
+}as const)
 
 export type UsersAC =
     ReturnType<typeof follow>
@@ -99,3 +115,4 @@ export type UsersAC =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof setLoaderParams>
+    | ReturnType<typeof setFollowing>

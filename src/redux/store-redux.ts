@@ -3,6 +3,7 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {profileReducer} from "./profile-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {userReducer} from "./user-reducer";
+import {authReducer} from "./auth-reducer";
 
 
 export type StoreReduxType = ReturnType<typeof reducers>
@@ -11,13 +12,15 @@ let reducers = combineReducers({
     profilePage : profileReducer,
     sidebar : sidebarReducer,
     usersPage : userReducer,
+    auth : authReducer
 
 })
 
 
 export let store = createStore(reducers);
 
-// window.store = store
+// @ts-ignore
+window.store = store
 
 
 

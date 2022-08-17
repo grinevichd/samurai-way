@@ -1,4 +1,5 @@
 import {StoreReduxType} from "./store-redux";
+import {usersAPI} from "../api/api";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -94,19 +95,11 @@ export const userReducer = (state: InitialStateType = initialState, action: User
 
 export const follow = (userID: number): FollowAT => ({type: FOLLOW, userID})
 export const unfollow = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
-export const setState = (users: UsersType[]): SetUsersAT => {
-
-  return   {type: SET_USERS, users}
-}
+export const setState = (users: UsersType[]): SetUsersAT => ({type: SET_USERS, users})
 export const setCurrentPage = (page: number) => ({type: "SET_CURRENT_PAGE", page} as const)
 export const setTotalUserCount = (count: number) => ({type: "SET_TOTAL_COUNT", count} as const)
 export const setLoaderParams = (value: boolean) => ({type: "CHANGE-LOADER", value} as const)
-
-export const setFollowing = (value:boolean,userID:number)=>({
-    type : "FOLLOWING_IN_PROGRESS",
-    value,
-    userID
-}as const)
+export const setFollowing = (value:boolean,userID:number)=>({type : "FOLLOWING_IN_PROGRESS",value,userID}as const)
 
 export type UsersAC =
     ReturnType<typeof follow>
@@ -116,3 +109,49 @@ export type UsersAC =
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof setLoaderParams>
     | ReturnType<typeof setFollowing>
+
+
+export const getUsersThunkCreator = (currentPage:number,pageSize:number)  =>{
+    return (dispatch:any)=> {
+    dispatch(setLoaderParams(true));
+        dispatch(setCurrentPage(currentPage))
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(response => {
+            dispatch(setState(response.items));
+            dispatch(setTotalUserCount(response.totalCount));
+            dispatch(setLoaderParams(false));
+        })
+
+}
+}
+
+export const UnfollowThunk = (userID : number)=>{
+    debugger
+    return (dispatch:any) =>{
+
+        dispatch(setFollowing(true,userID))
+        usersAPI.unfollowUser(userID)
+            .then(resultCode => {
+
+                if (resultCode === 0) {
+                    dispatch(unfollow(userID))
+                }
+            }).finally(()=>dispatch(setFollowing(false,userID)))
+    }
+}
+export const followThunk = (userID : number)=>{
+    debugger
+    return (dispatch:any) =>{
+
+        dispatch(setFollowing(true,userID))
+        usersAPI.followUser(userID)
+            .then(resultCode => {
+
+                if (resultCode === 0) {
+                    dispatch(follow(userID))
+                }
+            }).finally(()=>dispatch(setFollowing(false,userID)))
+    }
+}
+
+

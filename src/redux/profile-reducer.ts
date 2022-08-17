@@ -1,4 +1,6 @@
 import {ActionsTypes, AddPostActionType, ChangePostActionType, UserProfileAT} from "./store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_NEW_POST = "CHANGE-NEW-POST";
@@ -92,4 +94,14 @@ export const setUserProfile = (profile:UserProfile):UserProfileAT => {
       type : SET_USER_TYPE,
       profile
   }
+}
+
+
+export const getProfileThunk = (userID : string)=>{
+    return (dispatch: Dispatch<any>)=>{
+        usersAPI.getProfile(userID)
+            .then(response =>{
+                dispatch(setUserProfile(response.data))
+            })
+    }
 }

@@ -1,4 +1,9 @@
 import {StoreReduxType} from "./store-redux";
+import {MapDispatchPropsType} from "../companents/Header/HeaderContainer";
+import {authAPI, usersAPI} from "../api/api";
+import {DispatchProp} from "react-redux";
+import {Dispatch} from "redux";
+
 
 
 const SET_USERS_DATE = "SET_USERS"
@@ -46,3 +51,19 @@ export const setAuthUserData = (userID: number, email:string,login:string) => ({
 
 export type authAC =
     ReturnType<typeof setAuthUserData>
+
+
+
+export const AuthUserLogin = ()=>{
+    return    (dispatch : Dispatch<any>)=>{
+        debugger
+        authAPI.authLogin()
+            .then(data =>{
+                debugger
+                if(data.resultCode ===0){
+                    const {id,email,login} = data.data
+                    dispatch(setAuthUserData(id,email,login))
+                }
+            })
+    }
+}

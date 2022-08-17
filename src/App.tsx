@@ -8,9 +8,10 @@ import {Settings} from "./companents/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 import {DialogContainer} from "./companents/Dialogs/DialogsContainer";
 import {NaviContainer} from "./companents/Navi/NaviContainer"
-import {UsersContainer} from "./companents/Users/UserContainer";
+import UsersAPIComponent from "./companents/Users/UserContainer";
 import ProfileContainer from "./companents/Profile/ProfileContainer";
 import HeaderContainer from "./companents/Header/HeaderContainer";
+import {Login} from "./companents/Login/Login";
 
 
 type AppPropsType = {
@@ -43,7 +44,9 @@ const App = () => {
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
-                    <Route path={"/users"} component={UsersContainer}/>
+                    {/*<Route path={"/users"} component={UsersContainer}/>*/}
+                    <Route path={"/users"} render={() => <UsersAPIComponent/>}/>
+                    <Route path={"/login"} component={Login}/>
                 </div>
 
 

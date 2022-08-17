@@ -3,6 +3,7 @@ import style from "./InfoProfile.module.css"
 import {UserProfile} from "../../../redux/profile-reducer";
 import {Preloader} from "../../Preloader/Preloader";
 import image from "../../../assets/images/avatar.png"
+import {ProfileStatus} from "./ProfileStatus";
 
 type InfoProfileType = {
     profileUser : UserProfile | null
@@ -18,7 +19,9 @@ export const InfoProfile = (props:InfoProfileType) => {
             <img
                 src="https://www.tripzaza.com/ru/destinations/wp-content/uploads/2018/05/1-Grand_Canal-e1527214553775.jpg"
                 alt=""/>
+
             <div className={style.disriptionBlock}>{<img style={{width:"200px"}} src={props.profileUser.photos.large ? props.profileUser.photos.large : image} alt="empty"/>}</div>
+            <ProfileStatus status="helLLO"/>
             <div>{props.profileUser.aboutMe}</div>
             <div>Контакты:
                 <div>{props.profileUser.contacts.vk}</div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import exp from "constants";
 
 
 const instanceAxios = axios.create({
@@ -27,6 +28,15 @@ export const usersAPI = {
         return instanceAxios.delete(`follow/${userID}`)
             .then(res => res.data.resultCode)
     },
+
+    getProfile(userID:string){
+
+        return instanceAxios.get(`profile/${userID}`)
+
+    }
+}
+
+export const authAPI = {
     authLogin(){
         return instanceAxios.get(`auth/me`)
             .then(res => res.data)

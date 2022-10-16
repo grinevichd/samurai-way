@@ -1,18 +1,19 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import {StoreReduxType} from "../../redux/store-redux";
-import {
-    setCurrentPage,
-
-    UsersType, getUsersThunkCreator, followThunk, UnfollowThunk
-} from "../../redux/user-reducer";
-import loader from "../../assets/images/Infinity-1s-191px.svg"
-import axios from "axios";
+import {followThunk, getUsersThunkCreator, setCurrentPage, UnfollowThunk, UsersType} from "../../redux/user-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+     getUserSuperSelector
+} from "../../redux/users-selector";
 
 
 type MapStateToPropsType = {
@@ -90,15 +91,27 @@ class UsersAPIComponent extends React.Component<UserPropsType> {
 
 }
 
+// const mapStateToProps = (state: StoreReduxType): MapStateToPropsType => {
+//
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//
+//     }
+// }
 const mapStateToProps = (state: StoreReduxType): MapStateToPropsType => {
 
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUserSuperSelector(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
 
     }
 }
@@ -134,6 +147,6 @@ export default compose<React.ComponentType>(
         UnfollowThunk,
         followThunk
     }),
-    WithAuthRedirect
+
 )(UsersAPIComponent)
 

@@ -1,7 +1,7 @@
 import {ActionsTypes, AddMessageActionType, ChangeMessageActionType} from "./store";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
-const CHANGE_MESSAGE_POST = "CHANGE-MESSAGE-POST";
+
 export type DialogsType = {
     id: number
     name: string
@@ -13,7 +13,7 @@ export type MessagesType = {
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    messageText: string
+
 
 }
 let initialState: MessagesPageType = {
@@ -30,7 +30,7 @@ let initialState: MessagesPageType = {
         {id: 2, message: "Yo man"},
         {id: 3, message: "How are u"},
     ],
-    messageText: ""
+
 }
 export const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {
 
@@ -38,19 +38,14 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
     switch (action.type) {
         case ADD_MESSAGE: {
 
-            const message = {id: 6, message: state.messageText}
+            const message = {id: 6, message: action.value}
             return {
                 ...state,
                 messages: [...state.messages, message],
-                messageText: ""
+
             }
 
         }
-        case CHANGE_MESSAGE_POST:
-            return {
-                ...state,
-                messageText: action.message
-            }
 
 
         default :
@@ -59,13 +54,10 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
 
 
 }
-export const addMessageActionCreator = (): AddMessageActionType => {
-    return {type: ADD_MESSAGE}
+export const addMessageActionCreator = (value: string): AddMessageActionType => {
+    return {type: ADD_MESSAGE , value}
 }
 
-export const onMessageChangeActionCreator = (text: string): ChangeMessageActionType => {
 
-    return {type: CHANGE_MESSAGE_POST, message: text} as const
-}
 
 // export type DialogReducerAC = ReturnType<typeof addMessageActionCreator> | ReturnType<typeof onMessageChangeActionCreator>

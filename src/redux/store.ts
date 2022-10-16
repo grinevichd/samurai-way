@@ -26,13 +26,16 @@ export type ActionsTypes =
     | AddFriendAT
     | ChangeFriendAT
 | UserProfileAT
+| SetStatusAT
 
 
 export type AddPostActionType = {
     type: "ADD-POST"
+    value : string
 }
 export type AddMessageActionType = {
     type: "ADD-MESSAGE"
+    value : string
 }
 export type ChangePostActionType = {
     type: "CHANGE-NEW-POST",
@@ -53,6 +56,10 @@ export type UserProfileAT = {
     type : "SET_USER_TYPE"
     profile : UserProfile
 }
+type SetStatusAT = {
+    type : "SET_STATUS"
+    status : string
+}
 
 
 export let store: storeType = {
@@ -63,8 +70,9 @@ export let store: storeType = {
                 {id: 1, message: "Hello how are u?", countLikes: 15},
                 {id: 2, message: "yup it's my first post", countLikes: 25},
             ],
-            myPostText: "dima",
-            profileUser : null
+
+            profileUser : null,
+            status : ""
         },
         messagesPage: {
             dialogs: [
@@ -80,7 +88,7 @@ export let store: storeType = {
                 {id: 2, message: "Yo man"},
                 {id: 3, message: "How are u"},
             ],
-            messageText: ""
+
         },
         sidebar: {
             friends: [

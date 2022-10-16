@@ -1,16 +1,19 @@
 import React from "react";
 import style from "./InfoProfile.module.css"
-import {UserProfile} from "../../../redux/profile-reducer";
+import {updateStatusThunk, UserProfile} from "../../../redux/profile-reducer";
 import {Preloader} from "../../Preloader/Preloader";
 import image from "../../../assets/images/avatar.png"
 import {ProfileStatus} from "./ProfileStatus";
 
 type InfoProfileType = {
     profileUser : UserProfile | null
+    updateStatusThunk : (status : string) => void
+    status :  string
+
 }
 
-export const InfoProfile = (props:InfoProfileType) => {
-    console.log(props)
+export const  InfoProfile = (props:InfoProfileType) => {
+
    if(!props.profileUser){
        return <Preloader/>
    }
@@ -21,7 +24,7 @@ export const InfoProfile = (props:InfoProfileType) => {
                 alt=""/>
 
             <div className={style.disriptionBlock}>{<img style={{width:"200px"}} src={props.profileUser.photos.large ? props.profileUser.photos.large : image} alt="empty"/>}</div>
-            <ProfileStatus status="helLLO"/>
+            <ProfileStatus status={props.status} updateStatusThunk={props.updateStatusThunk}/>
             <div>{props.profileUser.aboutMe}</div>
             <div>Контакты:
                 <div>{props.profileUser.contacts.vk}</div>

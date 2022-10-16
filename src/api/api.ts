@@ -30,9 +30,25 @@ export const usersAPI = {
     },
 
     getProfile(userID:string){
+        console.warn("Please use profileAPI object")
+
+       return  profileAPI.getProfile(userID)
+
+    }
+}
+export const profileAPI = {
+    getProfile(userID:string){
 
         return instanceAxios.get(`profile/${userID}`)
 
+    },
+    getStatus(userID:string){
+
+        return instanceAxios.get(`profile/status/${userID}`)
+
+    },
+    updateStatus(status : string){
+        return instanceAxios.put(`profile/status/`, {status})
     }
 }
 
@@ -40,7 +56,14 @@ export const authAPI = {
     authLogin(){
         return instanceAxios.get(`auth/me`)
             .then(res => res.data)
-    }
+    },
+    login(email:string ,password :string, rememberMe: boolean = false ){
+        return instanceAxios.post(`/auth/login`,{email ,password , rememberMe})
+    },
+    logout(){
+        return instanceAxios.delete(`/auth/login`)
+    },
+
 }
 
 

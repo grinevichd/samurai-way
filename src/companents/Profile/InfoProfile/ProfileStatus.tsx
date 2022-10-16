@@ -1,21 +1,46 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
+import {setState} from "../../../redux/user-reducer";
 
 
 type ProfileStatusType = {
     status: string
+    updateStatusThunk : (status : string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
     // constructor(props : ProfileStatusType) {
     //     super(props);
     // }
+
     state = {
-        editMode: false
+        editMode: false,
+        status : this.props.status
     }
-    changeEditMode(){
+    offEditMode(){
         this.setState({
-            editMode : !this.state.editMode
+            editMode : false
         })
+
+            this.props.updateStatusThunk(this.state.status)
+
+
+    }
+    onEditMode = ()=>{
+        this.setState({
+            editMode : true
+        })
+    }
+    statusChange(e:ChangeEvent<HTMLInputElement>){
+        this.setState({
+            status : e.currentTarget.value
+        })
+    }
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                status : this.props.status
+            })
+        }
     }
 
 
@@ -24,11 +49,11 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
 
         return <div>
             {!this.state.editMode && <div>
-                <span onDoubleClick={this.changeEditMode.bind(this)}>{status}</span>
+                <span onDoubleClick={this.onEditMode}>{status}</span>
             </div>}
             {this.state.editMode &&
                 <div>
-                    <input type="text" value={status} autoFocus onBlur={this.changeEditMode.bind(this)}/>
+                    <input onChange={this.statusChange.bind(this)} type="text" value={this.state.status} autoFocus onBlur={this.offEditMode.bind(this)}/>
                 </div>}
 
         </div>;

@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./companents/Header/Header";
-import {Profile} from "./companents/Profile/Profile";
 import {News} from './companents/News/News';
 import {Music} from "./companents/Music/Music";
 import {Settings} from "./companents/Settings/Settings";
@@ -11,49 +9,64 @@ import {NaviContainer} from "./companents/Navi/NaviContainer"
 import UsersAPIComponent from "./companents/Users/UserContainer";
 import ProfileContainer from "./companents/Profile/ProfileContainer";
 import HeaderContainer from "./companents/Header/HeaderContainer";
-import {Login} from "./companents/Login/Login";
+import Login from "./companents/Login/Login";
+import {connect} from "react-redux";
+import {AuthUserLogin} from "./redux/auth-reducer";
+import {compose} from "redux";
+import {initializeTC} from "./redux/app-reducer";
+import {StoreReduxType} from "./redux/store-redux";
+import {Preloader} from "./companents/Preloader/Preloader";
 
-
-type AppPropsType = {
-    // state: RootPropsType
-    // dispatch: (action: ActionsTypes) => void
-    // store : StoreReduxType
+export type MapDispatchPropsType = {
+    initializeTC : ()=>void
+}
+export type MapStatePropsType = {
+    initialized : boolean
 }
 
 
-const App = () => {
+class App extends React.Component<MapDispatchPropsType & MapStatePropsType> {
+    componentDidMount() {
+        this.props.initializeTC()
+    }
+    render() {
+        if(!this.props.initialized) return <Preloader/>
+
+        return (
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    <HeaderContainer/>
+                    <NaviContainer/>
+                    <div className="app-wrapper-content">
+                        <Route path={"/dialogs"}
+                               render={() => <DialogContainer
+                               />}/>
+
+                        <Route path={"/profile/:id?"}
+                               render={() => <ProfileContainer
+
+                               />}
+
+                        />
+                        <Route path={"/news"} component={News}/>
+                        <Route path={"/music"} component={Music}/>
+                        <Route path={"/settings"} component={Settings}/>
+                        <Route path={"/users"} render={() => <UsersAPIComponent/>}/>
+                        <Route path={"/login"} component={Login}/>
+                    </div>
 
 
-    return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <NaviContainer/>
-                <div className="app-wrapper-content">
-                    <Route path={"/dialogs"}
-                           render={() => <DialogContainer
-                           />}/>
-
-                    <Route path={"/profile/:id?"}
-                           render={() => <ProfileContainer
-
-                           />}
-
-                    />
-
-                    <Route path={"/news"} component={News}/>
-                    <Route path={"/music"} component={Music}/>
-                    <Route path={"/settings"} component={Settings}/>
-                    {/*<Route path={"/users"} component={UsersContainer}/>*/}
-                    <Route path={"/users"} render={() => <UsersAPIComponent/>}/>
-                    <Route path={"/login"} component={Login}/>
                 </div>
-
-
-            </div>
-        </BrowserRouter>
-    );
+            </BrowserRouter>
+        );
+    }
 }
 
+const mapStateToProps = (state : StoreReduxType):MapStatePropsType => {
+    return {
+        initialized : state.app.initialized
+    }
+}
+export default compose(
 
-export default App;
+    connect(mapStateToProps, {initializeTC})(App));

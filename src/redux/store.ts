@@ -1,5 +1,5 @@
 import {dialogsReducer, MessagesPageType} from "./dialogs-reducer";
-import {ProfilePageType, profileReducer, UserProfile} from "./profile-reducer";
+import {deletePost, ProfilePageType, profileReducer, UserProfile} from "./profile-reducer";
 import {SidebarType} from "./sidebar-reducer";
 
 
@@ -25,17 +25,18 @@ export type ActionsTypes =
     | ChangeMessageActionType
     | AddFriendAT
     | ChangeFriendAT
-| UserProfileAT
-| SetStatusAT
+    | UserProfileAT
+    | SetStatusAT
+    | ReturnType<typeof deletePost>
 
 
 export type AddPostActionType = {
     type: "ADD-POST"
-    value : string
+    value: string
 }
 export type AddMessageActionType = {
     type: "ADD-MESSAGE"
-    value : string
+    value: string
 }
 export type ChangePostActionType = {
     type: "CHANGE-NEW-POST",
@@ -53,12 +54,12 @@ export type ChangeFriendAT = {
     message: string
 }
 export type UserProfileAT = {
-    type : "SET_USER_TYPE"
-    profile : UserProfile
+    type: "SET_USER_TYPE"
+    profile: UserProfile
 }
 type SetStatusAT = {
-    type : "SET_STATUS"
-    status : string
+    type: "SET_STATUS"
+    status: string
 }
 
 
@@ -71,8 +72,8 @@ export let store: storeType = {
                 {id: 2, message: "yup it's my first post", countLikes: 25},
             ],
 
-            profileUser : null,
-            status : ""
+            profileUser: null,
+            status: ""
         },
         messagesPage: {
             dialogs: [
@@ -98,7 +99,7 @@ export let store: storeType = {
                 {name: "Victoria"}
 
             ],
-            newFriend : ""
+            newFriend: ""
         }
     },
     _callSubscriber(state: any) {

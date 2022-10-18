@@ -41,7 +41,7 @@ export type  initializedAT =
 
 
 export const  initializeTC = ()=>{
-    debugger
+
     return    (dispatch : any)=>{
        const promise = dispatch(AuthUserLogin())
          return    Promise.all([promise]).then(() => {

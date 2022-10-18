@@ -12,26 +12,30 @@ type FormDataType ={
 }
 
 
-export const MyPosts = (props: MyPostsPropsType) => {
+
+export class MyPosts extends React.Component<MyPostsPropsType> {
+
+    // shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
+    //     return nextProps === this.props
+    // }
+
+    render() {
+        const addPost = (value: FormDataType) => {
+            this.props.addPost(value.myPostText)
+        }
 
 
+        const postsElements = this.props.profile.postsData.map(post => <Post message={post.message}
+                                                                             countLikes={post.countLikes}/>)
+        return (
+            <div className={style.postBlock}>
+                <h3>My Post</h3>
+                <AddPostFormRedux onSubmit={addPost}/>
+                {postsElements}
 
-
-    const addPost = (value : FormDataType)=>{
-        props.addPost(value.myPostText)
+            </div>
+        );
     }
-
-
-
-    const postsElements = props.profile.postsData.map(post => <Post message={post.message} countLikes={post.countLikes}/>)
-    return (
-        <div className={style.postBlock}>
-            <h3>My Post</h3>
-            <AddPostFormRedux onSubmit={addPost}/>
-            {postsElements}
-
-        </div>
-    );
 }
 
 const maxLength = maxLengthCreator(5)

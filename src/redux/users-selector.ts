@@ -9,7 +9,7 @@ export const getPageSize = (state:StoreReduxType) =>{
     return state.usersPage.pageSize
 }
 export const getUserSuperSelector = createSelector(getUsers,(users) =>{
-    debugger
+
     return users.filter(u => true)
 })
 

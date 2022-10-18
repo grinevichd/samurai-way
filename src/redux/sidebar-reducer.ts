@@ -37,7 +37,7 @@ export function sidebarReducer(state : SidebarType =initialState , action : Acti
             return {...state, friends : [...state.friends,{name : state.newFriend}] ,newFriend : "" }
         }
         case "CHANGE-FRIEND-NAV":{
-            debugger
+
             let clone = {...state}
             clone.newFriend = action.message
             return clone

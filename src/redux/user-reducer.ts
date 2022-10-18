@@ -1,4 +1,3 @@
-import {StoreReduxType} from "./store-redux";
 import {usersAPI} from "../api/api";
 
 const FOLLOW = "FOLLOW"
@@ -126,7 +125,7 @@ export const getUsersThunkCreator = (currentPage:number,pageSize:number)  =>{
 }
 
 export const UnfollowThunk = (userID : number)=>{
-    debugger
+
     return (dispatch:any) =>{
 
         dispatch(setFollowing(true,userID))
@@ -140,7 +139,7 @@ export const UnfollowThunk = (userID : number)=>{
     }
 }
 export const followThunk = (userID : number)=>{
-    debugger
+
     return (dispatch:any) =>{
 
         dispatch(setFollowing(true,userID))

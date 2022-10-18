@@ -18,7 +18,7 @@ export type MyPostsPropsType = mapDispatchToPropsType & mapStateToPropsType
 
 
 const mapStateToProps = (state: StoreReduxType): mapStateToPropsType => {
-    debugger
+
     return {
         profile: state.profilePage,
 

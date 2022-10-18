@@ -1,8 +1,6 @@
 import {StoreReduxType} from "./store-redux";
-import {MapDispatchPropsType} from "../companents/Header/HeaderContainer";
-import {authAPI, usersAPI} from "../api/api";
-import {DispatchProp} from "react-redux";
-import {AnyAction, Dispatch} from "redux";
+import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 
@@ -58,7 +56,7 @@ export type authAC =
 
 
 export const AuthUserLogin = ()=>(dispatch : Dispatch)=>{
-    debugger
+
       return   authAPI.authLogin()
             .then(data =>{
                 if(data.resultCode ===0){

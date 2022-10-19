@@ -2,10 +2,10 @@ import {ActionsTypes, AddPostActionType, UserProfileAT} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
-const ADD_POST = "ADD-POST";
+const ADD_POST = "profile/ADD-POST";
 
-const SET_USER_TYPE = "SET_USER_TYPE";
-const SET_STATUS = "SET_STATUS";
+const SET_USER_TYPE = "profile/SET_USER_TYPE";
+const SET_STATUS = "profile/SET_STATUS";
 export  type PostsType = {
     id: number
     message: string
@@ -81,7 +81,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case "profile/DELETE-POST":
             return {
                 ...state,
-                postsData : state.postsData.filter(post => post.id !== action.postID)
+                postsData: state.postsData.filter(post => post.id !== action.postID)
             }
 
         default :
@@ -89,53 +89,24 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     }
 
 }
-export const addPostActionCreator = (value: string): AddPostActionType => {
-    return {type: ADD_POST, value}
-}
+export const addPostActionCreator = (value: string): AddPostActionType => ({type: ADD_POST, value})
 export const deletePost = (postID: number) => ({type: 'profile/DELETE-POST', postID} as const)
-export const setUserProfile = (profile: UserProfile): UserProfileAT => {
+export const setUserProfile = (profile: UserProfile): UserProfileAT => ({type: SET_USER_TYPE, profile})
+const setStatus = (status: string) => ({type: SET_STATUS, status})
 
-    return {
-        type: SET_USER_TYPE,
-        profile
-    }
+
+export const getProfileThunk = (userID: string) => async (dispatch: Dispatch) => {
+    const response = await usersAPI.getProfile(userID)
+    dispatch(setUserProfile(response.data))
 }
-const setStatus = (status: string) => {
-    return {
-        type: SET_STATUS,
-        status
-    }
+export const getUserStatusThunk = (userID: string) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.getStatus(userID)
+    dispatch(setStatus(res.data))
 }
-
-
-export const getProfileThunk = (userID: string) => {
-    return (dispatch: Dispatch) => {
-        usersAPI.getProfile(userID)
-            .then(response => {
-                dispatch(setUserProfile(response.data))
-            })
-    }
-}
-export const getUserStatusThunk = (userID: string) => {
-
-    return (dispatch: Dispatch) => {
-        profileAPI.getStatus(userID)
-            .then(res => {
-
-                dispatch(setStatus(res.data))
-            })
-    }
-}
-export const updateStatusThunk = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(res => {
-                if (res.data.resultCode === 0) {
-
-                    dispatch(setStatus(status))
-                }
-
-            })
+export const updateStatusThunk = (status: string) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.updateStatus(status)
+    if (res.data.resultCode === 0) {
+        dispatch(setStatus(status))
     }
 }
 

@@ -48,11 +48,7 @@ export function sidebarReducer(state : SidebarType =initialState , action : Acti
 
 }
 
-export const changeFriend = (text : string) : ChangeFriendAT =>{
-    return {type : "CHANGE-FRIEND-NAV", message : text}
-}
-export const addFriend = () : AddFriendAT =>{
-    return {type : "ADD-FRIEND"}
-}
+export const changeFriend = (text : string) : ChangeFriendAT =>({type : "CHANGE-FRIEND-NAV", message : text})
+export const addFriend = () : AddFriendAT =>({type : "ADD-FRIEND"})
 
 

@@ -5,14 +5,13 @@ import {StoreReduxType} from "../../redux/store-redux";
 import {followThunk, getUsersThunkCreator, setCurrentPage, UnfollowThunk, UsersType} from "../../redux/user-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-     getUserSuperSelector
+    getUserSuperSelector
 } from "../../redux/users-selector";
 
 
@@ -56,7 +55,7 @@ class UsersAPIComponent extends React.Component<UserPropsType> {
     }
 
     onPageChange = (pageNumber: number) => {
-        debugger
+
         this.props.getUsers(pageNumber, this.props.pageSize)
         // this.props.setCurrentPage(pageNumber)
         // this.props.setLoaderParams(true)
@@ -73,7 +72,7 @@ class UsersAPIComponent extends React.Component<UserPropsType> {
 
     render() {
         console.log(this.props)
-    debugger
+
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users

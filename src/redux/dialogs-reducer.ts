@@ -1,4 +1,4 @@
-import {ActionsTypes, AddMessageActionType, ChangeMessageActionType} from "./store";
+import {ActionsTypes, AddMessageActionType} from "./store";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 
@@ -54,9 +54,7 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
 
 
 }
-export const addMessageActionCreator = (value: string): AddMessageActionType => {
-    return {type: ADD_MESSAGE , value}
-}
+export const addMessageActionCreator = (value: string): AddMessageActionType => ({type: ADD_MESSAGE , value})
 
 
 

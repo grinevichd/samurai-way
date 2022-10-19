@@ -31,7 +31,7 @@ export type ActionsTypes =
 
 
 export type AddPostActionType = {
-    type: "ADD-POST"
+    type: "profile/ADD-POST"
     value: string
 }
 export type AddMessageActionType = {
@@ -54,11 +54,11 @@ export type ChangeFriendAT = {
     message: string
 }
 export type UserProfileAT = {
-    type: "SET_USER_TYPE"
+    type: "profile/SET_USER_TYPE"
     profile: UserProfile
 }
 type SetStatusAT = {
-    type: "SET_STATUS"
+    type: "profile/SET_STATUS"
     status: string
 }
 

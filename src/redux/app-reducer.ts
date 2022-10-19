@@ -1,7 +1,7 @@
 import {AuthUserLogin} from "./auth-reducer";
 
 
-const initialized_success = "initialized_success"
+const initialized_success = "app/initialized_success"
 
 export type InitialStateAuthType = {
 
@@ -40,14 +40,12 @@ export type  initializedAT =
 
 
 
-export const  initializeTC = ()=>{
-
-    return    (dispatch : any)=>{
+export const  initializeTC = ()=>  (dispatch : any)=>{
        const promise = dispatch(AuthUserLogin())
          return    Promise.all([promise]).then(() => {
                 dispatch(initializedSuccessAC())
             })
 
 
-    }
+
 }

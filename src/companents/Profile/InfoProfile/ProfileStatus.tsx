@@ -47,16 +47,16 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
     render() {
         const {status} = this.props
 
-        return <div>
-            {!this.state.editMode && <div>
+        return <>
+            {!this.state.editMode && <>
                 <span onDoubleClick={this.onEditMode}>{status}</span>
-            </div>}
+            </>}
             {this.state.editMode &&
                 <div>
                     <input onChange={this.statusChange.bind(this)} type="text" value={this.state.status} autoFocus onBlur={this.offEditMode.bind(this)}/>
                 </div>}
 
-        </div>;
+        </>;
     }
 };
 

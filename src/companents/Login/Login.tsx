@@ -40,9 +40,9 @@ const LoginReduxForm = reduxForm<FormDataType>({
 })(LoginForm)
 
 const Login = (props : any) => {
-    debugger
+
     const onSubmit = (formData : FormDataType)=>{
-        debugger
+
         props.loginThunk(formData.login,formData.password,formData.rememberMe)
 
     }

@@ -1,6 +1,7 @@
-import {ActionsTypes, AddPostActionType, UserProfileAT} from "./store";
+import {ActionsTypes, AddPostActionType, RootPropsType, UserProfileAT} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "profile/ADD-POST";
 
@@ -23,7 +24,8 @@ export type UserProfile = {
         "youtube": null | string
         "github": null | string
         "mainLink": null | string
-    },
+    }
+
     "lookingForAJob": boolean
     "lookingForAJobDescription": null | string
     "fullName": string
@@ -58,6 +60,7 @@ let initialState: ProfilePageType = {
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
 
     switch (action.type) {
+
         case ADD_POST: {
             const newPost = {id: 5, message: action.value, countLikes: 0}
             return {
@@ -83,7 +86,22 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 postsData: state.postsData.filter(post => post.id !== action.postID)
             }
+        case "profile/SET-PHOTO":{
 
+            return {
+                ...state,
+                profileUser : {
+                    ...state.profileUser,
+                    photos : action.photos,
+
+                } as any
+            }
+        }
+        case "profile/SET-PROFILE":
+            return {
+                ...state,
+                // profileUser : {...state, }
+            }
         default :
             return state
     }
@@ -93,6 +111,8 @@ export const addPostActionCreator = (value: string): AddPostActionType => ({type
 export const deletePost = (postID: number) => ({type: 'profile/DELETE-POST', postID} as const)
 export const setUserProfile = (profile: UserProfile): UserProfileAT => ({type: SET_USER_TYPE, profile})
 const setStatus = (status: string) => ({type: SET_STATUS, status})
+export const setPhoto = (photos: { "small": string, "large": string}) => ({type: 'profile/SET-PHOTO', photos} as const)
+export const setProfile = (profile : any) => ({type: 'profile/SET-PROFILE', profile} as const)
 
 
 export const getProfileThunk = (userID: string) => async (dispatch: Dispatch) => {
@@ -108,5 +128,36 @@ export const updateStatusThunk = (status: string) => async (dispatch: Dispatch) 
     if (res.data.resultCode === 0) {
         dispatch(setStatus(status))
     }
+}
+
+export const savePhoto = (file : any) => async (dispatch:Dispatch) =>{
+
+    const res = await profileAPI.savePhoto(file)
+    if (res.data.resultCode === 0) {
+        dispatch(setPhoto(res.data.data.photos))
+    }
+
+}
+export const saveProfile = (value : any) => async (dispatch:any,getState:any) =>{
+
+    const res = await profileAPI.saveProfile(value)
+    if (res.data.resultCode === 0) {
+       const id = getState().auth.id
+
+       dispatch(getProfileThunk(id))
+    }else{
+        debugger
+        const index = res.data.messages[0].indexOf(">") + 1
+        let text = ''
+        for (let i = index; i < res.data.messages[0].length-1 ; i++) {
+          text +=  res.data.messages[0][i]
+        }
+
+        const a = text.toLowerCase()
+
+        dispatch(stopSubmit('form',{'contacts': {[a]: res.data.messages[0]}}))
+        return Promise.reject(res.data.messages[0])
+    }
+
 }
 

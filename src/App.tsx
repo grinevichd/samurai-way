@@ -6,7 +6,8 @@ import {Settings} from "./companents/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 import {NaviContainer} from "./companents/Navi/NaviContainer"
 import UsersAPIComponent from "./companents/Users/UserContainer";
-
+// import ProfileContainer from "./companents/Profile/ProfileContainer";
+// import DialogContainer from "./companents/Dialogs/DialogsContainer";
 import HeaderContainer from "./companents/Header/HeaderContainer";
 import Login from "./companents/Login/Login";
 import {connect, Provider} from "react-redux";

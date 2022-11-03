@@ -1,5 +1,5 @@
 import {dialogsReducer, MessagesPageType} from "./dialogs-reducer";
-import {deletePost, ProfilePageType, profileReducer, UserProfile} from "./profile-reducer";
+import {deletePost, ProfilePageType, profileReducer, setPhoto, setProfile, UserProfile} from "./profile-reducer";
 import {SidebarType} from "./sidebar-reducer";
 
 
@@ -28,6 +28,8 @@ export type ActionsTypes =
     | UserProfileAT
     | SetStatusAT
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof setPhoto>
+    | ReturnType<typeof setProfile>
 
 
 export type AddPostActionType = {

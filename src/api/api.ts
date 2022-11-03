@@ -1,5 +1,6 @@
 import axios from "axios";
 import exp from "constants";
+import {saveProfile} from "../redux/profile-reducer";
 
 
 const instanceAxios = axios.create({
@@ -49,7 +50,18 @@ export const profileAPI = {
     },
     updateStatus(status : string){
         return instanceAxios.put(`profile/status/`, {status})
-    }
+    },
+    savePhoto(photoFile : any){
+        const formData = new FormData()
+        formData.append("image", photoFile)
+        return instanceAxios.put(`profile/photo/`, formData, { headers : {"Content-Type" : "multipart/form-data"}})
+    },
+    saveProfile(profile : any){
+
+        return instanceAxios.put(`profile`, profile)
+    },
+
+
 }
 
 export const authAPI = {

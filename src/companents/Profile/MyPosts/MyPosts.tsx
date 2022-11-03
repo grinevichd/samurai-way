@@ -25,7 +25,7 @@ export class MyPosts extends React.Component<MyPostsPropsType> {
         }
 
 
-        const postsElements = this.props.profile.postsData.map(post => <Post message={post.message}
+        const postsElements = this.props.profile.postsData.map(post => <Post key={post.id} message={post.message}
                                                                              countLikes={post.countLikes}/>)
         return (
             <div className={style.postBlock}>

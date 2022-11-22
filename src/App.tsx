@@ -3,7 +3,7 @@ import './App.css';
 import {News} from './companents/News/News';
 import {Music} from "./companents/Music/Music";
 import {Settings} from "./companents/Settings/Settings";
-import {BrowserRouter, Link, Redirect, Route, useParams} from "react-router-dom";
+import {BrowserRouter, HashRouter, Link, Redirect, Route, useParams} from "react-router-dom";
 import {NaviContainer} from "./companents/Navi/NaviContainer"
 import UsersAPIComponent from "./companents/Users/UserContainer";
 // import ProfileContainer from "./companents/Profile/ProfileContainer";
@@ -99,10 +99,10 @@ const mapStateToProps = (state: StoreReduxType): MapStatePropsType => {
 const AppContainer = compose(connect(mapStateToProps, {initializeTC})(App));
 
 const MainApp = (props: any) => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default MainApp

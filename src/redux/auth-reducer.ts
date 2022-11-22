@@ -1,5 +1,5 @@
 import {StoreReduxType} from "./store-redux";
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
@@ -7,7 +7,8 @@ import {ThunkAction} from "redux-thunk";
 
 type FormReduxSubmitType = ReturnType<typeof stopSubmit>
 
-const SET_USERS_DATE = "auth/SET_USERS"
+const SET_USERS_DATE = "auth/SET_USERS" as const
+const SET_CAPTCHA = "auth/SET_CAPTCHA" as const
 
 export type InitialStateAuthType = {
 
@@ -16,6 +17,7 @@ export type InitialStateAuthType = {
     login: string | null
     isFetching: boolean
     isAuth: boolean
+    captcha: string | null
 }
 
 
@@ -25,7 +27,8 @@ let initialState: InitialStateAuthType = {
     email: null,
     login: null,
     isFetching: false,
-    isAuth: false
+    isAuth: false,
+    captcha: null,
 }
 
 export const authReducer = (state: InitialStateAuthType = initialState, action: authAC): InitialStateAuthType => {
@@ -37,6 +40,11 @@ export const authReducer = (state: InitialStateAuthType = initialState, action: 
                 ...action.payload,
 
 
+            }
+        case SET_CAPTCHA :
+            return {
+                ...state,
+                captcha : action.url
             }
         default :
             return state
@@ -50,10 +58,14 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
         id: userID, email, login, isAuth
     }
 })
+export const setCaptchaUrl = (url: string) => ({
+    type: SET_CAPTCHA, url
+})
 
 
 export type authAC =
-    ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof setCaptchaUrl>
 
 
 export const AuthUserLogin = () => async (dispatch: Dispatch) => {
@@ -63,13 +75,21 @@ export const AuthUserLogin = () => async (dispatch: Dispatch) => {
         dispatch(setAuthUserData(id, email, login, true))
     }
 }
+export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
+    const res = await securityAPI.getCaptchaUrl()
+    const captchaUrl = res.data.url
+    dispatch(setCaptchaUrl(captchaUrl))
+}
 
-export const loginThunk = (email: string, password: string, rememberMe: boolean): ThunkAction<void, StoreReduxType, unknown, authAC | FormReduxSubmitType> =>
+export const loginThunk = (email: string, password: string, rememberMe: boolean,captcha : string | null): ThunkAction<void, StoreReduxType, unknown, authAC | FormReduxSubmitType> =>
     async (dispatch) => {
-        const res = await authAPI.login(email, password, rememberMe)
+        const res = await authAPI.login(email, password, rememberMe,captcha)
         if (res.data.resultCode === 0) {
             await dispatch(AuthUserLogin())
         } else {
+            if(res.data.resultCode === 10){
+             await   dispatch(getCaptchaUrl())
+            }
             const message = res.data.messages.length > 0 ? res.data.messages[0] : "some Error"
             dispatch(stopSubmit('login', {_error: message}))
         }

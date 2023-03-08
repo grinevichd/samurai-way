@@ -9,7 +9,7 @@ and you can also change yours. There is also a feed of posts that the user can c
 ![](src/assets/img/1.png)
 
 The project is under development. Some features may be unavailable.
-If you have questions or want to know something, you can write to [me](https://www.linkedin.com/in/vlad-loban-992b34244/).
+If you have questions or want to know something, you can write to [me](https://www.linkedin.com/in/dmitry-grinevich-493321220/).
 
 ---
 

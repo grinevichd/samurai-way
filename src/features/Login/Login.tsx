@@ -70,8 +70,8 @@ const Login = (props: LoginPropsType) => {
         <span>Copyright © 2022. All Rights Reserved.</span>
         <span>Developed by <a
           className={styles.a}
-          href={'https://www.linkedin.com/in/vlad-loban-992b34244/'}
-          target="_blank">Loban Vlad</a>
+          href={'https://www.linkedin.com/in/dmitry-grinevich-493321220/'}
+          target="_blank">Grinevich Dmitry</a>
             </span>
       </div>
     </div>

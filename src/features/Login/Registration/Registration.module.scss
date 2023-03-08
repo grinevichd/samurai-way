@@ -1,0 +1,25 @@
+@import '../../../common/styles/Variablies';
+
+.registrationComponent {
+  color: $twoColor;
+
+  @media (max-width: 990px) {
+    padding: 30px;
+  }
+
+  .text {
+    margin-left: 60px;
+    margin-bottom: 70px;
+    line-height: 24px;
+
+    @media (max-width: 990px) {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .a {
+      color: black;
+    }
+  }
+}

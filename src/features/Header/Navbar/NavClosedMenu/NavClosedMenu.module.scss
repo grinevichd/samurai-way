@@ -1,0 +1,49 @@
+@import "../../../../common/styles/Variablies";
+
+.navClosedMenuBox {
+  display: flex;
+  visibility: hidden;
+  position: absolute;
+
+  @media (max-width: 950px) {
+    visibility: visible;
+    position: relative;
+  }
+
+  .menuItem {
+    margin: 19px 13px 13px 13px;
+    text-align: center;
+    cursor: pointer;
+
+    svg {
+      fill: $white;
+    }
+
+    span {
+      margin-left: 10px;
+      color: $white;
+      font-size: 20px;
+      line-height: 10px;
+    }
+  }
+
+  .navMenu {
+    @include menu(117px);
+    left: 0;
+
+    .navItem {
+      margin: 13px;
+
+      .nav {
+        color: #000000;
+        font-size: 18px;
+        text-decoration: none;
+        line-height: 10px;
+      }
+
+      .activeLink {
+        color: $bgColor;
+      }
+    }
+  }
+}

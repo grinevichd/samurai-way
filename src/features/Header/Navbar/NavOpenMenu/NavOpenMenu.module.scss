@@ -1,0 +1,47 @@
+@import "../../../../common/styles/Variablies";
+
+.navOpenMenuBox {
+  display: flex;
+  text-align: center;
+
+  @media (max-width: 950px) {
+    visibility: hidden;
+    position: fixed;
+  }
+
+  .nav {
+    position: relative;
+    padding: 13px;
+    color: $white;
+    text-decoration: none;
+    line-height: 10px;
+    transition-duration: 0.2s;
+    @include activeBorder();
+
+    @media (max-width: 950px) {
+      transition: none;
+    }
+
+    svg {
+      fill: $white;
+      transition-duration: 0.2s;
+
+      @media (max-width: 950px) {
+        transition: none;
+      }
+    }
+
+    span {
+      display: block;
+      margin-top: 4px;
+    }
+  }
+
+  .activeLink:after {
+    width: 100%;
+
+    @media (max-width: 950px) {
+      transition: none;
+    }
+  }
+}

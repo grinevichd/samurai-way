@@ -1,0 +1,53 @@
+@import "../../../../common/styles/Variablies";
+
+.UserMenuBox {
+  @include menu(238px);
+  right: 0;
+
+  @media (max-width: 950px) {
+    @include menu(170px);
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15px 20px;
+  }
+
+  .onlineStatus {
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+
+    span {
+      color: $twoColor;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+  }
+
+  .settingBox {
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+    height: 142px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .logoutButton {
+    padding: 15px 20px;
+    text-align: center;
+
+    span {
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition-duration: 0.2s;
+
+      &:hover {
+        color: $twoColor;
+      }
+    }
+  }
+}

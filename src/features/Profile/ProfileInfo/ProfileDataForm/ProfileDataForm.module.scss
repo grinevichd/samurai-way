@@ -1,0 +1,70 @@
+@import "../../../../common/styles/Variablies";
+
+.form {
+  position: relative;
+
+  .buttons {
+    position: absolute;
+    left: 74px;
+    top: -70px;
+
+    @media (max-width: 900px) {
+      position: relative;
+      left: 0;
+      top: -55px;
+    }
+
+    .saveButton {
+      width: 150px !important;
+
+      .loader {
+        @include preloader(27px, 4px solid $white, 1s);
+      }
+    }
+  }
+
+  .titleBox {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15px 20px;
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    input[type=text], textarea {
+      @include inputTextarea()
+    }
+
+    textarea {
+      height: 100px !important;
+      resize: none;
+    }
+  }
+
+  .titleName {
+    @media (max-width: 900px) {
+      margin-top: -40px;
+    }
+  }
+
+  .titleError {
+    @media (max-width: 900px) {
+      position: relative;
+      top: -40px;
+      width: 100%;
+    }
+  }
+
+  .formSummeryError {
+    display: inline-block;
+    border: red 1px solid;
+    border-radius: 5px 5px 0 0;
+
+    span {
+      color: red;
+      font-size: 16px;
+    }
+  }
+}
+

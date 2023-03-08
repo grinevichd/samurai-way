@@ -1,0 +1,14 @@
+@import "../../../common/styles/Variablies";
+
+.messageComponent {
+
+    .messageBox {
+        @include message($bgColor, $white);
+        justify-content: flex-end;
+
+        .imgAvatar {
+            margin-left: 10px;
+        }
+    }
+}
+

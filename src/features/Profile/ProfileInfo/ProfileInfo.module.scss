@@ -1,0 +1,138 @@
+@import "./../../../common/styles/Variablies";
+
+.profileInfo {
+    width: 300px;
+    grid-area: profileInfo;
+
+    @media (max-width: 900px) {
+        width: 100%;
+    }
+
+    .profileBox {
+        position: relative;
+        text-align: center;
+        @include borderBox();
+        padding-bottom: 5px;
+
+        .backgroundAvatar {
+            background-color: $bgColor;
+            height: 135px;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: 120px;
+        }
+
+        .avatarBox {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            background-color: $white;
+            width: 220px;
+            height: 220px;
+            padding: 5px;
+            border-radius: 50%;
+
+            @media (max-width: 349px) {
+                width: 180px;
+                height: 180px;
+            }
+
+            .avatar {
+                width: 210px;
+                height: 210px;
+                border-radius: 50%;
+
+                @media (max-width: 349px) {
+                    width: 170px;
+                    height: 170px;
+                }
+            }
+
+            svg {
+                position: absolute;
+                bottom: 12px;
+                right: 12px;
+                cursor: pointer;
+            }
+        }
+
+        .infoNameBox {
+            .name {
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+
+        @media (max-width: 365px) {
+            flex-wrap: wrap;
+        }
+
+        .button {
+            box-shadow: 0 5px 15px rgb(0 0 0 / 15%);
+            border-radius: 5px;
+            width: 130px;
+            height: 40px;
+            font-size: 16px;
+            position: relative;
+
+            &:hover {
+                box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
+            }
+
+            svg {
+                fill: $white !important;
+                width: 18px;
+                height: 18px;
+                position: relative;
+                top: 3px
+            }
+
+            .span {
+                font-size: 16px;
+                margin-left: 8px;
+            }
+
+            .loader {
+                @include preloader(27px, 4px solid $white, 1s);
+            }
+        }
+
+        .followButton {
+            @include loginButton($bgSecondButton, $white, 0.3s);
+        }
+
+        .messageButton {
+            @include loginButton($bgColor, $white, 0.3s);
+
+            a {
+                text-decoration: none;
+                color: $white;
+            }
+        }
+
+        .settings {
+            @include loginButton($bgColor, $white, 0.3s);
+            width: 150px;
+        }
+    }
+
+    .nuneButton {
+        transition: none;
+        visibility: hidden;
+    }
+
+    .infoBox {
+        position: relative;
+        text-align: center;
+        @include borderBox();
+        margin-top: 15px;
+    }
+}
+
+
+

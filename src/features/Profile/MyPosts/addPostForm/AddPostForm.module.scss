@@ -1,0 +1,44 @@
+@import "../../../../common/styles/Variablies";
+
+.form {
+  @include borderBox();
+  border-top: 5px $bgColor solid;
+  height: 122px;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 20px;
+  margin-bottom: 25px;
+
+  @media (max-width: 900px) {
+    margin-top: 25px;
+  }
+
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+    height: 160px;
+  }
+
+  .titleBox {
+    width: 320px;
+    @media (max-width: 1140px) {
+      width: 100%;
+      margin-right: 25px;
+    }
+
+    @media (max-width: 500px) {
+      margin-right: 0;
+    }
+
+    textarea {
+      @include inputTextarea();
+      height: 55px !important;
+      resize: none;
+      text-align: left;
+    }
+  }
+
+  .button {
+    @include loginButton($bgColor, $white, 0.3s);
+    @include buttonStyle();
+  }
+}

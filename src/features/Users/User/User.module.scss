@@ -1,0 +1,109 @@
+@import "../../../common/styles/Variablies";
+
+.userComponent {
+  @include borderBox();
+  width: 250px;
+  height: 295px;
+  margin: 12px;
+  text-align: center;
+
+
+  @media (max-width: 1140px) {
+    width: 30%;
+  }
+
+  @media (max-width: 776px) {
+    width: 45%;
+  }
+
+  @media (max-width: 604px) {
+    width: 100%;
+  }
+
+  .userInfo {
+    padding: 25px 10px 0 10px;
+
+    .imgAvatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+
+    .userName {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .status {
+      height: 40px;
+      margin: 5px 0;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 10px 25px 10px;
+    border-bottom: 1px solid #e5e5e5;
+
+    .button {
+      box-shadow: 0 5px 15px rgb(0 0 0 / 15%);
+      border-radius: 5px;
+      height: 35px;
+      position: relative;
+      padding: 5px !important;
+
+      &:hover {
+        box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
+      }
+
+      svg {
+        fill: $white !important;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        top: 3px
+      }
+
+      .span {
+        font-size: 14px;
+        margin-left: 8px;
+      }
+
+      .loader {
+        @include preloader(25px, 4px solid $white, 1s);
+      }
+    }
+
+    .followButton {
+      @include loginButton($bgSecondButton, $white, 0.3s);
+      width: 60%;
+    }
+
+    .messageButton {
+      @include loginButton($bgColor, $white, 0.3s);
+      width: 30%;
+
+      a {
+        text-decoration: none;
+        color: $white;
+      }
+    }
+  }
+
+  .viewProfile {
+    margin-top: 13px;
+
+    a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+      transition-duration: 0.3s;
+
+      &:hover {
+        color: $twoColor;
+      }
+    }
+  }
+}

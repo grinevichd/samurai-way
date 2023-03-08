@@ -1,0 +1,62 @@
+@import "../../../../common/styles/Variablies";
+
+.postBox {
+    @include borderBox();
+    margin-bottom: 25px;
+
+    .nameBox {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+
+        .img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+        }
+
+        .nameTitle {
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    }
+
+    .postText {
+        padding: 0 15px 15px;
+        border-bottom: 1px solid #e5e5e5;
+        word-wrap: break-word;
+    }
+
+    .footerPost {
+        padding: 5px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .likeBox {
+            display: flex;
+            align-items: center;
+
+            svg {
+                fill: $twoColor;
+            }
+
+            .numberLike {
+                margin-left: 10px;
+                margin-top: 3px;
+            }
+        }
+
+        .delete {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            svg {
+                fill: red;
+            }
+        }
+
+    }
+}

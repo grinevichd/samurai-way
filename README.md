@@ -1,32 +1,26 @@
+# Social-network
 
+### The project is under development. Some features may be unavailable.
 
-В этом стартовом проекте установлены следующие библиотеки
+grinevichd.github.io/samurai-way/
 
-- **antd** 
-- **axios** 
-- **classnames**
-- **formik**
-- **gh-pages**
-- **jest**
-- **react** and **@types/react**
-- **react-dom** and **@types/react-dom**
-- **react-redux** and **@types/react-redux**
-- **react-router-dom** and **@types/react-router-dom**
-- **react-scripts** 
-- **react-test-renderer** and **@types/react-test-renderer**
-- **redux**
-- **redux-form** and **@types/redux-form**
-- **redux-thunk**
-- **reselect**
-- **typescript** 
-- **uuid** and **@types/uuid**
+There are several sections in the social network, the first one is 'Profile'. Here you will see information about users,
+and you can also change yours. There is also a feed of posts that the user can create.
+![](src/assets/img/1.png)
 
-После git clone 'link' установите все зависимости из package.json:
-### `yarn`
+The project is under development. Some features may be unavailable.
+If you have questions or want to know something, you can write to [me](https://www.linkedin.com/in/vlad-loban-992b34244/).
 
-а потом запустите проект:
-### `yarn start`
+---
 
+### Technologies:
 
-<hr>
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React (class components)
+- TypeScript
+- Redux
+- React-Redux
+- React-Router-Dom
+- Redux-Thunk
+- Redux-Form
+- Axios
+- SASS

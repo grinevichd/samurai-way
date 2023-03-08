@@ -1,0 +1,19 @@
+.profileComponent {
+  display: grid;
+  //gap: 0 25px;
+  justify-items: center;
+  grid-template-areas:
+    "profileInfo myPostsContainer";
+
+  @media (max-width: 1140px) {
+    grid-template-areas:
+    "profileInfo myPostsContainer"
+  }
+
+  @media (max-width: 900px) {
+    grid-template-areas:
+    "profileInfo"
+    //"infoContentComponent"
+    "myPostsContainer";
+  }
+}

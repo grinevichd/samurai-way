@@ -1,0 +1,26 @@
+@import "../../../common/styles/Variablies";
+
+.dialog {
+  padding: 20px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+
+  .imgAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .nav {
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+
+  .activeLink {
+    color: $bgColor;
+  }
+}

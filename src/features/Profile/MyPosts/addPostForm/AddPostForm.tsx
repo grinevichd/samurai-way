@@ -24,7 +24,6 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
       </div>
       <div className={styles.buttons}>
         <button className={`${styles.button} ${styles.settings}`}>
-          {/*<SvgSelector svgName={"Post"}/>*/}
           <span className={styles.span}>Add post</span>
         </button>
       </div>

@@ -68,7 +68,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 
   return <div className={styles.profileInfo}>
     <div className={styles.profileBox}>
-      <div className={styles.backgroundAvatar}></div>
+      <div className={styles.backgroundAvatar}/>
       <div className={styles.avatarBox}>
         <img alt={userImg}
              src={props.profile?.photos.large ? props.profile.photos.large : userImg}
@@ -105,7 +105,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             onClick={onClickFollowHandler}
           >
             {props.followingInProgress.some(id => id === userID) ?
-              <span className={styles.loader}></span>
+              <span className={styles.loader}/>
               :
               <span>
                 <span className={styles.span}>UnFollow</span>
@@ -119,7 +119,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             onClick={onClickUnFollowHandler}
           >
             {props.followingInProgress.some(id => id === userID) ?
-              <span className={styles.loader}></span>
+              <span className={styles.loader}/>
               :
               <span>
                 <span className={styles.span}>Follow</span>

@@ -11,7 +11,7 @@ export const RepairComponent = (props: RepairComponentPropsType) => {
       <br/>
       <a style={{color: '_black'}}
          target="_blank"
-         href={'https://github.com/xxxGaDxxx/samurai-way-main'}
+         href={'https://github.com/grinevichd/samurai-way'}
       >Read more on GitHub</a>
     </p>
   </div>
